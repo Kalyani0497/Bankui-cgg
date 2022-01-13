@@ -5,13 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bankui.beans.Account;
 import com.bankui.beans.Deposit;
+import com.bankui.beans.Help;
 import com.bankui.beans.Transfer;
 
 @Controller
 public class DashboardController {
 
 	String path="dashboard/"; 
+	
+	@Autowired
+	private Help help;
+	
+	@Autowired
+	private Account account;
 	
 	@Autowired
 	private Transfer transfer; 
@@ -47,7 +55,9 @@ public class DashboardController {
 	
 	@RequestMapping("/balance")
 	public String showBalanceScreen(Model model) {
+		model.addAttribute("balance", account);
 		return path+"balance";
+	
 	}
 	
 	@RequestMapping("/settings")
@@ -57,6 +67,7 @@ public class DashboardController {
 	
 	@RequestMapping("/help")
 	public String showHelpScreen(Model model) {
+		model.addAttribute("help",help);
 		return path+"help";
 	}
 	
